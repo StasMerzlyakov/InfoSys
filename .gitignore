@@ -34,3 +34,10 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+*.pyc
+*.egg-info
+*.sublime*
+skyProject.egg-info
+pyramid.log
+pyramid.pid
+
