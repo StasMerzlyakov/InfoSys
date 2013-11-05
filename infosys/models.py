@@ -1,3 +1,5 @@
+#-*- coding: UTF-8 -*-
+
 from sqlalchemy import (
     Column,
     Index,
@@ -18,10 +20,12 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
 
-class MyModel(Base):
-    __tablename__ = 'models'
-    id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
+"""
+  Классификатор адресообразующих элементов
+"""
+class Object(Base):
+    __tablename__ = 'fiac_object'
+    """ Глобальный уникальный идентификатор адресного объекта  """
+    aoguid = Column(Text, primary_key=True)
 
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+
