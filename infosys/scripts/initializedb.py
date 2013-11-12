@@ -12,10 +12,8 @@ from pyramid.paster import (
 
 from pyramid.scripts.common import parse_vars
 
-from ..models import (
-    DBSession,
-    Base,
-    )
+from ..models import DBSession
+from ..models.base import Base
 
 
 def usage(argv):
@@ -32,10 +30,10 @@ def main(argv=sys.argv):
     # - оставил для проверки скрипта model
     # - при проверка раскомментировать
     # - потом закомментировать
-    #config_uri = argv[1]
-    #options = parse_vars(argv[2:])
-    #setup_logging(config_uri)
-    #settings = get_appsettings(config_uri, options=options)
-    #engine = engine_from_config(settings, 'sqlalchemy.')
-    #DBSession.configure(bind=engine)
-    #Base.metadata.create_all(engine)
+    config_uri = argv[1]
+    options = parse_vars(argv[2:])
+    setup_logging(config_uri)
+    settings = get_appsettings(config_uri, options=options)
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    DBSession.configure(bind=engine)
+    Base.metadata.create_all(engine)
