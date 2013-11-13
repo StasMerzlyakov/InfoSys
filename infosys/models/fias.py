@@ -13,6 +13,9 @@ from sqlalchemy import (
     )
 
 
+from sqlalchemy.schema import ForeignKey
+
+
 """
   Классификатор адресообразующих элементов
 """
@@ -86,20 +89,16 @@ class Object(Base):
     aolevel = Column(Integer,nullable=False)
 
     """ Идентификатор объекта родительского объекта """
-    """ HINT !!! """
-    parentguid = Column(String(length=36)) 
+    parentguid = Column(String(length=36), ForeignKey('FIAS_Object.aoid')) 
 
     """ Уникальный идентификатор записи. Ключевое поле. """
-    """ HINT !!! """
     aoid = Column(String(length=36),primary_key=True)
 
     """ Идентификатор записи связывания с предыдушей исторической записью """
-    """ HINT !!! """
-    previd = Column(String(length=36))
+    previd = Column(String(length=36), ForeignKey('FIAS_Object.aoid'), nullable=True)
 
     """ Идентификатор записи  связывания с последующей исторической записью """
-    """ HINT !!! """
-    nextid = Column(String(length=36))
+    nextid = Column(String(length=36), ForeignKey('FIAS_Object.aoid'), nullable=True)
 
     """ Код адресного объекта одной строкой с признаком актуальности из КЛАДР 4.0. """
     code = Column(String(length=17))
@@ -107,21 +106,17 @@ class Object(Base):
     """ Код адресного объекта из КЛАДР 4.0 одной строкой без признака актуальности (последних двух цифр)"""
     plaincode = Column(String(length=15))
 
-    """ Статус актуальности адресного объекта ФИАС. 
-        Актуальный адрес на текущую дату. 
-        Обычно последняя запись об адресном объекте.
-         0 – Не актуальный
-         1 - Актуальный """
-    actstatus = Column(Integer, nullable=False)
+    """ Статус актуальности адресного объекта ФИАС.  """
+    actstatus = Column(Integer,ForeignKey('FIAS_ActualStatus.actstatid'), nullable=False)
 
     """ Статус центра """
-    centstatus = Column(Integer, nullable=False)
+    centstatus = Column(Integer, ForeignKey('FIAS_CenterStatus.centerstid'), nullable=False)
 
     """ Статус действия над записью – причина появления записи (см OperationStatus) """
-    operstatus = Column(Integer, nullable=False)
+    operstatus = Column(Integer, ForeignKey('FIAS_OperationStatus.operstatid'), nullable=False)
 
     """ Статус актуальности КЛАДР 4 (последние две цифры в коде) """
-    currstatus = Column(Integer, nullable=False)
+    currstatus = Column(Integer, ForeignKey('FIAS_CurrentStatus.curentstid'), nullable=False)
 
     """ Начало действия записи """
     startdate = Column(Date, nullable=False)
@@ -130,8 +125,7 @@ class Object(Base):
     enddate = Column(Date, nullable=False)
 
     """ Внешний ключ на нормативный документ"""
-    """ HINT !!!!"""
-    normdoc = Column(String(length=36))
+    normdoc = Column(String(length=36), ForeignKey('FIAS_NormDoc.normdocid'))
 
     """ Признак действующего адресного объекта """
     livestatus=Column(Boolean, nullable=False)
@@ -169,7 +163,7 @@ class House(Base):
     housenum = Column(String(length=20))
 
     """ Признак владения """
-    eststatus = Column(Integer, nullable=False)
+    eststatus = Column(Integer, ForeignKey('FIAS_EstateStatus.eststatid'), nullable=False)
 
     """ Номер корпуса """
     buildnum = Column(String(length=10))
@@ -178,10 +172,9 @@ class House(Base):
     strucnum = Column(String(length=10))
 
     """ Признак строения """
-    strstatus = Column(Integer)
+    strstatus = Column(Integer, ForeignKey('FIAS_StructureStatus.strstatid'), nullable=False)
 
     """ Уникальный идентификатор записи дома """
-    """ HINT !!! """
     houseid = Column(String(length=36), primary_key=True)
   
     """ Глобальный уникальный идентификатор дома """
@@ -199,11 +192,11 @@ class House(Base):
     enddate = Column(Date, nullable=False)
  
     """ Состояние дома """
-    statstatus  = Column(Integer, nullable=False)   
+    statstatus  = Column(Integer, ForeignKey('FIAS_HouseStateStatus.housestid'), nullable=False)   
    
     """ Внешний ключ на нормативный документ """
     """ HINT !!! """
-    normdoc = Column(String(length=36))
+    normdoc = Column(String(length=36), ForeignKey('FIAS_NormDoc.normdocid'))
  
     """ Счетчик записей домов для КЛАДР 4 """
     counter = Column(Integer, nullable=False)    
@@ -263,8 +256,7 @@ class HouseInterval(Base):
     enddate = Column(Date, nullable=False)
      
     """ Внешний ключ на нормативный документ """
-    """ HINT !!! """
-    normdoc = Column(String(length=36))
+    normdoc = Column(String(length=36), ForeignKey('FIAS_NormDoc.normdocid'))
  
     """ Счетчик записей домов для КЛАДР 4 """
     counter = Column(Integer, nullable=False)
@@ -322,8 +314,7 @@ class Landmark(Base):
     enddate = Column(Date, nullable=False)
      
     """ Внешний ключ на нормативный документ """
-    """ HINT !!! """
-    normdoc = Column(String(length=36))
+    normdoc = Column(String(length=36), ForeignKey('FIAS_NormDoc.normdocid'))
 
 
 """ Сведения по нормативному документу, являющемуся основанием присвоения адресному элементу наименования """
