@@ -17,7 +17,7 @@ from sqlalchemy import (
   Классификатор адресообразующих элементов
 """
 class Object(Base):
-    __tablename__ = 'FIAC_Object'
+    __tablename__ = 'FIAS_Object'
     """ Глобальный уникальный идентификатор адресного объекта  """
     """ HINT !!! """
     aoguid = Column(String(length=36),unique=True, nullable=False)
@@ -140,7 +140,7 @@ class Object(Base):
 
 """ Сведения по номерам домов улиц городов и населенных пунктов, номера земельных участков и т.п """
 class House(Base):
-    __tablename__ = 'FIAC_House'
+    __tablename__ = 'FIAS_House'
     """ Почтовый индекс """
     postalcode = Column(String(length=6))
 
@@ -212,7 +212,7 @@ class House(Base):
 
 """ Интервалы домов """
 class HouseInterval(Base):
-    __tablename__ = 'FIAC_HouseInterval'
+    __tablename__ = 'FIAS_HouseInterval'
 
     """ Почтовый индекс """
     postalcode = Column(String(length=6))
@@ -274,7 +274,7 @@ class HouseInterval(Base):
 """ Описание мест расположения  имущественных объектов """
 class Landmark(Base):
 
-    __tablename__ = 'FIAC_Landmark'
+    __tablename__ = 'FIAS_Landmark'
 
     """ Месторасположение ориентира """
     location = Column(String(length=500), nullable=False)
@@ -329,7 +329,7 @@ class Landmark(Base):
 """ Сведения по нормативному документу, являющемуся основанием присвоения адресному элементу наименования """
 class Normdoc(Base):
 
-    __tablename__ = 'FIAC_NormDoc'
+    __tablename__ = 'FIAS_NormDoc'
 
     """ Идентификатор нормативного документа """
     normdocid = Column(String(length=36), primary_key=True)
@@ -356,7 +356,7 @@ class Normdoc(Base):
 """ Справочник. Тип адресного объекта """
 class AddressObjectType(Base):
 
-    __tablename__ = 'FIAC_AddressObjectType'
+    __tablename__ = 'FIAS_AddressObjectType'
  
     """ Уровень адресного объекта """
     level = Column(Integer, nullable=False)
@@ -374,7 +374,7 @@ class AddressObjectType(Base):
 """ Статус актуальности КЛАДР 4.0 """
 class CurrentStatus(Base):
 
-    __tablename__ = 'FIAC_CurrentStatus'
+    __tablename__ = 'FIAS_CurrentStatus'
  
     """ Идентификатор статуса (ключ) """
     curentstid = Column(Integer, primary_key=True)
@@ -387,7 +387,7 @@ class CurrentStatus(Base):
 """ Статус актуальности ФИАС """
 class ActualStatus(Base):
 
-    __tablename__ = 'FIAC_ActualStatus'
+    __tablename__ = 'FIAS_ActualStatus'
     
     """ Идентификатор статуса (ключ)  """
     actstatid  = Column(Integer, primary_key=True)
@@ -401,7 +401,7 @@ class ActualStatus(Base):
 """ Статус действия """
 class OperationStatus(Base):
    
-    __tablename__ = 'FIAC_OperationStatus'
+    __tablename__ = 'FIAS_OperationStatus'
   
     """ Идентификатор статуса (ключ) """
     operstatid = Column(Integer, primary_key=True)
@@ -428,7 +428,7 @@ class OperationStatus(Base):
 """ Статус центра """
 class CenterStatus(Base):
    
-    __tablename__ = 'FIAC_CenterStatus'
+    __tablename__ = 'FIAS_CenterStatus'
 
     """ Идентификатор статуса """
     centerstid = Column(Integer, primary_key=True)
@@ -440,7 +440,7 @@ class CenterStatus(Base):
 """ Статус интервала домов """
 class IntervalStatus(Base):
 
-    __tablename__ = 'FIAC_IntervalStatus'
+    __tablename__ = 'FIAS_IntervalStatus'
 
     """ Идентификатор статуса """
     intvstatid = Column(Integer, primary_key=True)
@@ -452,7 +452,7 @@ class IntervalStatus(Base):
 """ Статус состояния объектов недвижимости """
 class HouseStateStatus(Base):
    
-    __tablename__ = 'FIAC_HouseStateStatus'
+    __tablename__ = 'FIAS_HouseStateStatus'
 
     """ Идентификатор статуса """
     housestid = Column(Integer, primary_key=True)
@@ -464,7 +464,7 @@ class HouseStateStatus(Base):
 """ Признак владения """
 class EstateStatus(Base):
   
-    __tablename__ = 'FIAC_EstateStatus'
+    __tablename__ = 'FIAS_EstateStatus'
  
     """ Идентификатор статуса """ 
     eststatid = Column(Integer, primary_key=True)
@@ -480,7 +480,7 @@ class EstateStatus(Base):
 """ Признак строения """
 class StructureStatus(Base):
 
-    __tablename__ = 'FIAC_StructureStatus'
+    __tablename__ = 'FIAS_StructureStatus'
 
     """ Идентификатор """
     strstatid = Column(Integer, primary_key=True)

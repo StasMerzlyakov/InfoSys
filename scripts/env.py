@@ -10,7 +10,7 @@ from logging.config import fileConfig
 from sqlalchemy.engine.base import Engine
 from sqlalchemy import engine_from_config, pool
 
-from infosys.models import Base
+from infosys.models.base import Base
 
 #try:
     # if pylons app already in, don't create a new app
