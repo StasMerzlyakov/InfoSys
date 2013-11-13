@@ -123,11 +123,42 @@ def upgrade():
     Column('counter', Integer, nullable=False),
     ) 
 
+    op.create_table(
+    'FIAS_Landmark',
+    Column('location', String(length=500), nullable=False),
+    Column('postalcode', String(length=6)),
+    Column('ifnsul', String(length=4)),
+    Column('terrifnsul', String(length=4)),
+    Column('ifnsul', String(length=4)),
+    Column('terrifnsul', String(length=4)),
+    Column('okato', String(length=11)),
+    Column('oktmo', String(length=8)),
+    Column('updatedate', Date, nullable=False),
+    Column('landid',String(length=36), primary_key=True),
+    Column('landguid',String(length=36), unique=True, nullable=False),
+    Column('aoguid', String(length=36), nullable=False),
+    Column('startdate', Date, nullable=False),
+    Column('enddate', Date, nullable=False),
+    Column('statstatus', Integer, nullable=False),
+    Column('normdoc', String(length=36)),
+    )
+
+    op.create_table(
+    'FIAS_NormDoc',
+    Column('normdocid',String(length=36), primary_key=True),
+    Column('docname', String),
+    Column('docdate',Date),
+    Column('docnum', String(length=20)),
+    Column('doctype', Integer,nullable=False),
+    Column('docimgid', Integer, nullable=False)
+    )
 
 def downgrade():
     op.drop_table('FIAS_Object')
     op.drop_table('FIAS_House')
     op.drop_table('FIAS_HouseInterval')
+    op.drop_table('FIAS_Landmark')
+    op.drop_table('FIAS_NormDoc')
 
 
 
