@@ -99,9 +99,37 @@ def upgrade():
     Column('statstatus', Integer, nullable=False),
     Column('normdoc', String(length=36)),
     Column('counter', Integer, nullable=False),
+    )
+
+    op.create_table(
+    'FIAS_HouseInterval',
+    Column('postalcode', String(length=6)),
+    Column('ifnsul', String(length=4)),
+    Column('terrifnsul', String(length=4)),
+    Column('ifnsul', String(length=4)),
+    Column('terrifnsul', String(length=4)),
+    Column('okato', String(length=11)),
+    Column('oktmo', String(length=8)),
+    Column('updatedate', Date, nullable=False),
+    Column('intstart', Integer, nullable=False),
+    Column('intend', Integer,nullable=False),
+    Column('houseintid', String(length=36), primary_key=True),
+    Column('intguid', String(length=36), unique=True, nullable=False),
+    Column('aoguid', String(length=36), nullable=False),
+    Column('startdate', Date, nullable=False),
+    Column('enddate', Date, nullable=False),
+    Column('statstatus', Integer, nullable=False),
+    Column('normdoc', String(length=36)),
+    Column('counter', Integer, nullable=False),
     ) 
 
 
 def downgrade():
     op.drop_table('FIAS_Object')
     op.drop_table('FIAS_House')
+    op.drop_table('FIAS_HouseInterval')
+
+
+
+
+
