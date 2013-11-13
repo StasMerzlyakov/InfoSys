@@ -13,5 +13,5 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 
 import base
 
-import fiac
+import fias
 
