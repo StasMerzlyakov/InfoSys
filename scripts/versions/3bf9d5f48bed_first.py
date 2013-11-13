@@ -153,12 +153,74 @@ def upgrade():
     Column('docimgid', Integer, nullable=False)
     )
 
+    op.create_table(
+    'FIAS_AddressObjectType',
+    Column('level', Integer, nullable=False),
+    Column('scname', String(length=10)),
+    Column('socrname', String(length=50),nullable=False),
+    Column('kod_t_st', String(length=4), primary_key=True)
+    )
+
+    op.create_table(
+    'FIAS_CurrentStatus',
+    Column('curentstid', Integer, primary_key=True),
+    Column('name', String(length=100), nullable=False)
+    )
+
+    op.create_table(
+    'FIAS_ActualStatus',
+    Column('actstatid', Integer, primary_key=True),
+    Column('name', String(length=100),nullable=False)
+    )
+
+    op.create_table(
+    'FIAS_OperationStatus',
+    Column('operstatid', Integer, primary_key=True),
+    Column('name', String(length=100),nullable=False)
+    )
+   
+    op.create_table(
+    'FIAS_IntervalStatus',
+    Column('intvstatid', Integer, primary_key=True),
+    Column('name', String(length=60),nullable=False)
+    )
+ 
+    op.create_table(
+    'FIAS_HouseStateStatus',
+    Column('housestid', Integer, primary_key=True),
+    Column('name', String(length=60),nullable=False)
+    )
+
+    op.create_table(
+    'FIAS_EstateStatus',
+    Column('eststatid', Integer, primary_key=True),
+    Column('name', String(length=20),nullable=False),
+    Column('shortname', String(length=20),nullable=False)
+    )
+
+    op.create_table(
+    'FIAS_StructureStatus',
+    Column('strstatid', Integer, primary_key=True),
+    Column('name', String(length=20),nullable=False),
+    Column('shortname', String(length=20),nullable=False)
+    )
+
+
+ 
 def downgrade():
     op.drop_table('FIAS_Object')
     op.drop_table('FIAS_House')
     op.drop_table('FIAS_HouseInterval')
     op.drop_table('FIAS_Landmark')
     op.drop_table('FIAS_NormDoc')
+    op.drop_table('FIAS_AddressObjectType')
+    op.drop_table('FIAS_CurrentStatus')
+    op.drop_table('FIAS_ActualStatus')
+    op.drop_table('FIAS_OperationStatus')
+    op.drop_table('FIAS_IntervalStatus')
+    op.drop_table('FIAS_HouseStateStatus')
+    op.drop_table('FIAS_EstateStatus')
+    op.drop_table('FIAS_StructureStatus')   
 
 
 
