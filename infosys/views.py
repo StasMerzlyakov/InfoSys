@@ -9,9 +9,9 @@ from .models import (
     )
 
 
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
+@view_config(route_name='home', renderer='templates/index.pt')
 def my_view(request):
-    return {'one': 'Первый', 'project': 'infosys'}
+    return {}
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
