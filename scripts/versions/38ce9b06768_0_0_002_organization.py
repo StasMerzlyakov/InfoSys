@@ -32,12 +32,12 @@ def upgrade():
     op.create_table(
     'ORG_Organization',
     Column('id', BigInteger, primary_key=True),
-    Column('fullname', String(length=20), nullable=False),
-    Column('shortname', String(length=20), nullable=False, index=True),
+    Column('fullname', String(length=60), nullable=False),
+    Column('shortname', String(length=50), nullable=False, index=True),
     Column('prefix', String(length=10)),
-    Column('shortinfo', String(length=50), nullable=False),
+    Column('shortinfo', String(length=150), nullable=False),
     Column('fullinfo', Text),
-    Column('contact', Text))
+    Column('contactinfo', Text))
 
 
 def downgrade():

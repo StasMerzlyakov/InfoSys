@@ -28,22 +28,22 @@ class Organization(Base):
     id = Column(BigInteger, primary_key=True)
 
     """ Наименовение """
-    fullname = Column(String(length=20), nullable=False)
+    fullname = Column(String(length=60), nullable=False)
 
     """ Краткое наименование """
-    shortname = Column(String(length=20), nullable=False, index=True)
+    shortname = Column(String(length=50), nullable=False, index=True)
 
     """ Префикс наименования организации (ЗАО, ОАО, ООО и т.д.)"""
     prefix = Column(String(length=10))
 
     """ Краткая информация о роде деятельности """
-    shortinfo = Column(String(length=50), nullable=False)
+    shortinfo = Column(String(length=150), nullable=False)
 
     """ Описание рода дейтельности """
-    funllinfo = Column(Text)
+    fullinfo = Column(Text)
 
     """ Контактная информация """
-    contact = Column(Text)
+    contactinfo = Column(Text)
 
 
 

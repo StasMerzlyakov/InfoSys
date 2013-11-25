@@ -4,12 +4,12 @@ from pyramid.view import view_config
 
 from sqlalchemy.exc import DBAPIError
 
-from .models import (
+from ..models import (
     DBSession,
     )
 
 
-@view_config(route_name='home', renderer='templates/index.pt')
+@view_config(route_name='home', renderer='../templates/index.pt')
 def my_view(request):
     return {}
 
