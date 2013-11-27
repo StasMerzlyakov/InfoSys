@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*-
-"""first
+"""0.0.001_first
 
 Revision ID: 3bf9d5f48bed
 Revises: None
