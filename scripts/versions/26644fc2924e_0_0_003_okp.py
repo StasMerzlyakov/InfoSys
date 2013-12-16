@@ -21,19 +21,24 @@ from sqlalchemy import (
     Index,
     Integer,
     String,
-    ForeignKey
+    ForeignKey,
+    Boolean,
+    Date
     )
 
 
 def upgrade():
     op.create_table(
-    'Classifiers_OKP',
-    Column('id',Integer, primary_key=True),
-    Column('name',String(length=60), nullable=False, index=True),
+    'CL_OKP',
+    Column('id',Integer, primary_key=True, autoincrement=False),
+    Column('name',String(length=300), nullable=False, index=True),
     Column('code',String(length=50), nullable=False, index=True),
-    Column('pid',Integer, ForeignKey('Classifiers_OKP.id'), nullable=True),
-    Column('level',Integer, nullable=False))
+    Column('pid',Integer, ForeignKey('CL_OKP.id'), nullable=True, index=True),
+    Column('pcode', String(length=50), nullable=True, index=True),
+    Column('level',Integer, nullable=False),
+    Column('active',Boolean, nullable=False),
+    Column('updateDate', Date,nullable=False))
 
 def downgrade():
-    op.drop_table('Classifiers_OKP')
+    op.drop_table('CL_OKP')
 

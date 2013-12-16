@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>Untitled</title>
+<script type="text/javascript" src="${request.static_url('infosys:static/lib/dojo/dojo/dojo.js')}" data-dojo-config="'parseOnLoad':true,'async':true,'packages':[{'name':'gridx','location':'../gridx'},{'name':'clipart','location':'../../clipart'},{'name':'maqetta','location':'../../maqetta'},{'name':'shapes','location':'../../shapes'},{'name':'zazl','location':'../../zazl'}],'themeMap':[['Android','',['themes/android/android.css']],['BlackBerry','',['themes/blackberry/blackberry.css']],['iPad','',['themes/ipad/ipad.css']],['iPhone','',['themes/iphone/iphone.css']],['.*','',['themes/iphone/iphone.css']]],'mblThemeFiles':[],'mblLoadCompatPattern':''"></script>
+<script type="text/javascript">
+require([
+  "dijit/dijit",
+  "dojo/parser",
+  "maqetta/space",
+  "maqetta/AppStates",
+  "dojox/io/xhrScriptPlugin",
+  "dojo/data/ItemFileReadStore",
+  "gridx/Grid",
+  "gridx/core/model/cache/Async",
+  "dojox/data/CsvStore",
+  "dijit/form/TextBox",
+  "dijit/layout/TabContainer",
+  "dijit/layout/ContentPane",
+  "dijit/MenuBar",
+  "dijit/PopupMenuBarItem",
+  "dijit/MenuItem",
+  "dijit/Menu",
+  "dijit/layout/BorderContainer",
+  "dijit/TitlePane",
+  "dijit/form/Form"
+]);
+</script>
+<style>@import "${request.static_url('infosys:static/themes/claro/document.css')}";@import "${request.static_url('infosys:static/themes/claro/claro.css')}";@import "${request.static_url('infosys:static/lib/dojo/gridx/resources/claro/Gridx.css')}";@import "${request.static_url('infosys:static/lib/dojo/gridx/resources/claro/Gridx_rtl.css')}";@import "${request.static_url('infosys:static/app.css')}";
+</style>
+<script type="text/javascript" src="${request.static_url('infosys:static/app.js')}"></script>
+</head>
+<body data-maq-flow-layout="true" data-maq-comptype="desktop" class="claro" data-maq-ws="collapse" data-maq-appstates="{}" id="myapp">
+<span data-dojo-type="dijit/TitlePane" title="Параметры поиска" extractContent="false" preventCache="false" preload="true" refreshOnShow="false" duration="200" open="true" style="min-width: 1em; left: 0px; top: 10px; height: auto; width: 100%;">
+<!--!<form style="height: auto;">-->
+   <table border="0" style="border-collapse: collapse; table-layout: fixed; width: 100%; height: auto;">
+     <colgroup>
+       <col style="width: 131px;"></col>
+       <col></col>
+     </colgroup>
+     <tbody>
+       <tr>
+         <td>
+           <label>
+             Название организации:</label>
+         </td>
+         <td>
+           <input id="org_search_name" class="org_search" data-dojo-type="dijit.form.TextBox"></input>
+         </td>
+       </tr>
+    </tbody>
+   </table>
+<!--! </form> -->
+ </span>
+<div id="org_search_result_table" class="org_search">
+<table border="1" style="border-collapse: collapse; table-layout: fixed; width: 100%; height: auto;">
+ <colgroup>
+   <col></col>
+   <col></col>
+   <col id="col_8" class="org_search_result_table_address_column"></col>
+   <col></col>
+ </colgroup>
+ <tbody>
+   <tr>
+     <th id="org_fullname" style="left: 1px; top: 0.1666717529296875px;" class="org_search_result_table_header">
+       Название организации</th>
+     <th id="org_shortinfo" class="org_search_result_table_header">
+       Краткая информация</th>
+     <th id="org_address" class="org_search_result_table_header, org_search_result_table_address_column">
+       Адрес</th>
+     <th id="org_contact" class="org_search_result_table_header">
+       Контактная информация</th>
+   </tr>
+   <tr>
+     <td>
+       &nbsp;</td>
+     <td>
+       &nbsp;</td>
+     <td class="org_search_result_table_address_column">
+       &nbsp;</td>
+     <td>
+       &nbsp;</td>
+   </tr>
+ </tbody>
+</table>
+</div>
+</body>
+</html>
