@@ -40,4 +40,6 @@ nosetests.xml
 skyProject.egg-info
 pyramid.log
 pyramid.pid
+*.swp
+*~
 
