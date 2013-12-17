@@ -1,0 +1,35 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	padding: 2% 0 0;
+	background: #fff;
+	color: #333;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.container {
+	width: 1240px;
+	height: 600px;
+	border: solid 3px;
+	margin: 0 auto;
+}
+
+.center {
+
+}
+
+.top {
+	//background-image: url(header.jpg);
+	background color:blue;
+}
+
+.footer {
+	background color: red;
+}
+ 
+
+
