@@ -16,7 +16,7 @@ from sqlalchemy.schema import ForeignKey
 
 
 """
-  Коды ОКП
+  Код ОКП
 """
 class OKP(Base):
 
@@ -45,4 +45,30 @@ class OKP(Base):
 
     """ Дата обновления записи """
     updateDate = Column(Date, nullable=False)
+
+
+
+"""
+	Классификатор регионов.
+"""
+class Region(Base):
+		__tablename__='CL_Region'
+
+		""" Идентификатор """
+		id = Column(Integer, primary_key=True, autoincrement=False)
+		
+		""" Наименование """
+		name = Column(String(length=300), nullable=False, index=True)
+
+		""" Ссылка на родителя """
+		pid = Column(Integer, ForeignKey('CL_Region.id'), nullable=True, index=True)
+
+		""" Уровень вложенности """
+		level = Column(Integer, nullable=False)
+
+		""" Статус активности """
+		active = Column(Boolean, nullable=False)
+
+
+
 

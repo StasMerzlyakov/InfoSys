@@ -1,10 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru">
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<meta name="description" content="Сайт о поросенках-летунах и счастливой летучей жизни." />
-	<meta name="keywords" content="летать, свин-летун, пиггсы, полёты, лёччики, пилоты." />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="${request.static_url('infosys:static/style.css')}" type="text/css" />
+	 	<style type="text/css">
+      @import "dojoroot/dijit/themes/tundra/tundra.css";
+      @import "dojoroot/dojo/resources/dojo.css";
+  	</style>
+		<title>Поис компаний</title>
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<ul>
+          <li><label><input type="checkbox" />Item1</label></li>
+          <li>
+            <label><input type="checkbox" />ItemWithSubitems</label>
+            <ul>
+              <li><label><input type="checkbox" />Subitem1</label></li>
+            </ul>
+          </li>
+        </ul>
+			</div>
+		</div>
+		<div class="clearfloat"></div>
+	</body>
 </html>
 
