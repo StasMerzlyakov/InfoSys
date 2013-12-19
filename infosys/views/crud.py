@@ -34,8 +34,10 @@ def addFilterToQuery(query, attr, filterVal):
 		query = query.filter(attr != None)
 	return query
 
-@view_config(route_name='crud_model', renderer='jsonp')
-@view_config(route_name='crud_model:command', renderer='jsonp')
+@view_config(route_name='jsonp_crud_model', renderer='jsonp')
+@view_config(route_name='jsonp_crud_model:command', renderer='jsonp')
+@view_config(route_name='json_crud_model', renderer='json')
+@view_config(route_name='json_crud_model:command', renderer='json')
 def crud_model(request):
 	"""
 		/{model}/{command}
