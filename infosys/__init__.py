@@ -23,7 +23,5 @@ def main(global_config, **settings):
     # json crud
     config.add_route('json_crud_model', '/crud/json/{model}')
     config.add_route('json_crud_model:command', '/crud/json/{model}/{command}')
-
-
     config.scan()
     return config.make_wsgi_app()

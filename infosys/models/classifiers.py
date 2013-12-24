@@ -49,25 +49,28 @@ class OKP(Base):
 
 
 """
-	Классификатор регионов.
+  Классификатор регионов.
 """
 class Region(Base):
-		__tablename__='CL_Region'
+    __tablename__='CL_Region'
 
-		""" Идентификатор """
-		id = Column(Integer, primary_key=True, autoincrement=False)
-		
-		""" Наименование """
-		name = Column(String(length=300), nullable=False, index=True)
+    """ Идентификатор """
+    id = Column(Integer, primary_key=True, autoincrement=False)
 
-		""" Ссылка на родителя """
-		pid = Column(Integer, ForeignKey('CL_Region.id'), nullable=True, index=True)
+    """ Наименование """
+    name = Column(String(length=300), nullable=False, index=True)
 
-		""" Уровень вложенности """
-		level = Column(Integer, nullable=False)
+    """ Ссылка на родителя """
+    pid = Column(Integer, ForeignKey('CL_Region.id'), nullable=True, index=True)
 
-		""" Статус активности """
-		active = Column(Boolean, nullable=False)
+    """ Уровень вложенности """
+    level = Column(Integer, nullable=False)
+
+    """ Флаг, указывющий есть ли потомки у узла """
+    isParent = Column(Boolean, nullable=False)
+
+    """ Статус активности """
+    active = Column(Boolean, nullable=False)
 
 
 

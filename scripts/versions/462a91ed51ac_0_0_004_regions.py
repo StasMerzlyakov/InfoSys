@@ -20,12 +20,12 @@ from alembic import op
 import sqlalchemy as sa
 
 from sqlalchemy import (
-	  Column,
-	  Index,
-	  Integer,
-	  String,
-	  ForeignKey,
-	  Boolean,
+  Column,
+  Index,
+  Integer,
+  String,
+  ForeignKey,
+  Boolean,
 )
  
 def upgrade():
@@ -36,11 +36,11 @@ def upgrade():
     Column('pid',Integer, ForeignKey('CL_Region.id'), nullable=True, index=True),
     Column('level',Integer, nullable=False),
     Column('active',Boolean, nullable=False)
-		)
+  )
 
 
 def downgrade():
-		op.drop_table('CL_Region')
+    op.drop_table('CL_Region')
 
 
 
