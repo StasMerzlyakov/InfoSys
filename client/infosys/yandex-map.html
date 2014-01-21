@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var myMap, 
+            myPlacemark;
+
+        function init(){ 
+            myMap = new ymaps.Map ("map", {
+                center: [ymaps.geolocation.latitude, ymaps.geolocation.longitude],
+                zoom: 10
+            }); 
+            
+/*            myPlacemark = new ymaps.Placemark([ymaps.geolocation.latitude, ymaps.geolocation.longitude], {
+                hintContent: 'Я здесь',
+                balloonContent: 'ZZZ'
+            });
+            
+            myMap.geoObjects.add(myPlacemark);
+
+            myPlacemark.events.add('click', function () {
+              alert('О, событие!');
+            });
+
+            myMap.geoObjects.events.add('click', function (e) {
+              alert('Дошло до коллекции объектов карты');
+              // Получение ссылки на дочерний объект, на котором произошло событие
+              var object = e.get('target');
+            }); */
+
+            myMap.controls.add('zoomControl');
+
+            myMap.events.add('click', function (e) {
+              var coordPosition = e.get("coordPosition");
+              var myReverseGeocoder = ymaps.geocode(coordPosition);
+              myReverseGeocoder.then(
+                function(res){
+                  myMap.balloon.open(
+                    coordPosition, {
+                      contentBody: 'Адрес: ' + res.geoObjects.get(0).properties.get('balloonContentBody')
+                    }
+                  );
+                  console.log(res.geoObjects.get(0).properties);
+                }, function(err){
+                  alert('Адрес не найден');
+                }
+              
+              );
+           });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="map" style="width: 600px; height: 600px"></div>
+</body>
+
+</html>
+
