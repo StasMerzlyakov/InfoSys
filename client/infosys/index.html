@@ -37,9 +37,9 @@
 
               <ul class="dropdown-menu">
 
-                <li><a href="#regions" data-toggle="modal">Регионы</a></li>
+                <li class="disabled"><a href="#regions" data-toggle="modal">Регионы</a></li>
               
-                <li><a href="#">Товары/Услуги</a></li>
+                <li  class="disabled"><a href="#" >Товары/Услуги</a></li>
 
                 <li><a href="#keywords" data-toggle="modal" >Ключевые слова</a></li>
                 
@@ -115,25 +115,65 @@
       <div class="modal-dialog">
     
         <div class="modal-content">
+        
+          <form class="form-horisontal">
 
-          <div class="modal-header">
-      
-            <p>Ключевые слова</p> 
-
-          </div> 
+            <div class="modal-header">
+        
+              <p>Поиск по ключевым словам</p> 
   
-          <div class="modal-body">
+            </div> 
+    
+            <div class="modal-body">
+
+<!--              <div class="form-group">
+
+                <label for="contact-name" class="col-lg-2 control-label">Имя:</label>               
+          
+                <div class="col-lg-10">
+
+                  <input type="text" class="form-control" id="contact-name" placeholder="Введите имя"/>                     
+
+                </div>
+
+              </div>
+        
+              <div class="form-group">
+
+                <label for="contact-name" class="col-lg-2 control-label">Имя:</label>               
+          
+                <div class="col-lg-10">
+
+                  <input type="text" class="form-control" id="contact-name" placeholder="Введите имя"/>                     
+
+                </div>
+
+              </div> -->
+
+              <div class="form-group">
+  
+                <label for="search-keywords" class="col-lg-2 control-label">Ключевые слова:</label>               
+          
+                <div class="col-lg-10">
+        
+                  <textarea class="form-control" rows="8" id="search-keywords"></textarea>
+  
+                </div>
+  
+              </div> 
+
+          </div>
+
+ 
+            <div class="modal-footer">
       
-            <p>In this tutorial, we will be adding a jumbotron (formerly known as a hero unit) to our site. The purpose of the jumbotron is for large messages that you want your viewers to see clearly, such as your latest video or blog post.</p>
-             
-
-          </div>
-
-          <div class="modal-footer">
+              <a class="btn btn-default" data-dismiss="modal">Close</a>
     
-            <a class="btn btn-default" data-dismiss="modal">Close</a>
+              <button class="btn btn-primary" type="submit">Принять</button>
     
-          </div>
+            </div>
+
+          </form>
 
         </div> 
       
