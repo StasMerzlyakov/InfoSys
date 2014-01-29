@@ -27,13 +27,13 @@
   
           <ul class="nav navbar-nav navbar-right">
 
-            <li class="active"><a href="#">Поиск</a></li>
+            <li class="active"><a href="#">Искать</a></li>
 
-            <li><a href="#">Список компаний</a></li>
+            <!-- <li><a href="#">Список компаний</a></li> -->
 
             <li class="dropdown">
 
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Параметры поиска <b class="caret"></b></a>
+              <a href="#params" class="dropdown-toggle" data-toggle="dropdown">Параметры поиска <b class="caret"></b></a>
 
               <ul class="dropdown-menu">
 
@@ -99,7 +99,7 @@
       
       <div class="container">
         
-        <p class="navbar-text pull-left">Поиск компаний</p>
+<!--        <p class="navbar-text pull-left">Поиск компаний</p> -->
 <!--        <a href="http://youtube.com/codersguide" class="navbar-btn btn-danger btn pull-right">Подписаться?</a>
     -->
       </div>
@@ -120,7 +120,7 @@
 
             <div class="modal-header">
         
-              <p>Поиск по ключевым словам</p> 
+              <p>Фильтр по ключевым словам</p> 
   
             </div> 
     
@@ -152,11 +152,11 @@
 
               <div class="form-group">
   
-                <label for="search-keywords" class="col-lg-2 control-label">Ключевые слова:</label>               
+                <label for="search-keywords" class="col-lg-2 control-label">Искать:</label>               
           
                 <div class="col-lg-10">
         
-                  <textarea class="form-control" rows="8" id="search-keywords"></textarea>
+                  <input type="text" class="form-control" id="search-keywords" placeholder="Ключевые слова через пробел"/>
   
                 </div>
   
@@ -218,6 +218,7 @@
     <script type="text/javascript" src="out/infosys.js"></script>
     <script type="text/javascript">
       $(function() {
+        
    //     $("#organization").InfoSys({debug:true});
       });
     </script>
