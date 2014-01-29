@@ -13,11 +13,11 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 
 import base
 
-import fias
+#import fias
 
 import organization
 
-import classifiers
+#import classifiers
 
 
 
