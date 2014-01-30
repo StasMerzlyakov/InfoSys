@@ -29,8 +29,6 @@
 
             <li class="active"><a href="#">Искать</a></li>
 
-            <!-- <li><a href="#">Список компаний</a></li> -->
-
             <li class="dropdown">
 
               <a href="#params" class="dropdown-toggle" data-toggle="dropdown">Параметры поиска <b class="caret"></b></a>
@@ -39,13 +37,14 @@
 
                 <li class="disabled"><a href="#regions" data-toggle="modal">Регионы</a></li>
               
-                <li  class="disabled"><a href="#" >Товары/Услуги</a></li>
-
-                <li><a href="#keywords" data-toggle="modal" >Ключевые слова</a></li>
+                <li><a href="#keywords" data-toggle="modal" >Товары/Услуги</a></li>
                 
               </ul>
             
-            </li>    
+            </li>
+            
+            <li><a href="#new" data-toggle="modal" >Добавить</a></li>
+            
 
           </ul>
 
@@ -57,9 +56,8 @@
 
     
     <div class="container">
-     
+
       <div class="row">
-    
         <div class="col-md-6 col-md-offset-3">
           <h3><a href="#">ЗАО Пиво и воды</a></h3>
           <h6>(Удмуртия, Ижевск)</h6>
@@ -109,6 +107,53 @@
       <div id="organization"/>
     </div> 
    -->
+   
+    <div class="modal fade" id="new" role="dialog">
+        
+        <div class="modal-dialog">
+            
+            <div class="modal-content">
+              
+               <div class="modal-header">
+				   
+				   <button class="close" data-dismiss="modal", aria-hidden="true">
+					
+						<span class="glyphicon glyphicon-remove"></span>
+				   
+				   </button>
+				   
+				   <h3 class="modal-title">Добавить организацию</h3>
+				   
+               </div>
+                    
+                    <form id="new-organization-form" class="modal-body" role="form">
+						
+						<div class="form-group">
+							<input type="text" class="form-control input-lg" placeholder="Название организации" required name="name"></input>
+						</div>
+						
+						<div class="form-group">
+							 <textarea class="form-control input-lg" rows="3", placeholder="Регион, населенный пункт", required, name="placeinfo"></textarea>
+            			</div>
+
+						<div class="form-group">
+							 <textarea class="form-control input-lg" rows="5", placeholder="Описание деятельности", required, name="shortinfo"></textarea>
+            			</div>
+	                
+                    </form>
+                  
+                    <div class="modal-footer">
+    
+                        <button class="btn btn-primary" type="submit">Добавить</button>
+    
+                    </div>
+                
+            
+            </div>
+        
+        </div>
+    
+    </div>
 
     <div class="modal fade" id="keywords" role="dialog">
      
@@ -116,64 +161,34 @@
     
         <div class="modal-content">
         
-          <form class="form-horisontal">
-
             <div class="modal-header">
-        
-              <p>Фильтр по ключевым словам</p> 
-  
+
+				<button class="close" data-dismiss="modal", aria-hidden="true">
+					
+					<span class="glyphicon glyphicon-remove"></span>
+				   
+				</button>
+				   
+				<h3 class="modal-title">Ограничение по ключевым словам</h3>
+
             </div> 
     
-            <div class="modal-body">
-
-<!--              <div class="form-group">
-
-                <label for="contact-name" class="col-lg-2 control-label">Имя:</label>               
-          
-                <div class="col-lg-10">
-
-                  <input type="text" class="form-control" id="contact-name" placeholder="Введите имя"/>                     
-
-                </div>
-
-              </div>
-        
-              <div class="form-group">
-
-                <label for="contact-name" class="col-lg-2 control-label">Имя:</label>               
-          
-                <div class="col-lg-10">
-
-                  <input type="text" class="form-control" id="contact-name" placeholder="Введите имя"/>                     
-
-                </div>
-
-              </div> -->
+            <form class="modal-body" role="form">
 
               <div class="form-group">
   
-                <label for="search-keywords" class="col-lg-2 control-label">Искать:</label>               
-          
-                <div class="col-lg-10">
-        
-                  <input type="text" class="form-control" id="search-keywords" placeholder="Ключевые слова через пробел"/>
-  
-                </div>
+                  <input type="text" id="search-keywords" class="form-control input-lg" placeholder="Товары/услуги через пробел" required name="keywords"></input>
   
               </div> 
 
-          </div>
+			</form>
 
  
             <div class="modal-footer">
       
-              <a class="btn btn-default" data-dismiss="modal">Close</a>
-    
               <button class="btn btn-primary" type="submit">Принять</button>
     
             </div>
-
-          </form>
 
         </div> 
       
@@ -218,8 +233,10 @@
     <script type="text/javascript" src="out/infosys.js"></script>
     <script type="text/javascript">
       $(function() {
-        
-   //     $("#organization").InfoSys({debug:true});
+        $(".nav li").click(function(){
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+        });
       });
     </script>
   </body>
