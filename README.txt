@@ -23,3 +23,11 @@ Getting Started
 - $env/bin/alembic -c development.ini -n app:main downgrade -1
 
 
+
+
+1. sphinxsearch
+2. postgresql
+3. pg-sphinx
+
+
+
