@@ -24,10 +24,8 @@ Getting Started
 
 
 
-
-1. sphinxsearch
-2. postgresql
-3. pg-sphinx
+0. coffeescript
+1. postgresql
 
 
 
