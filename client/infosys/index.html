@@ -55,9 +55,9 @@
     </div>
 
     
-    <div class="container">
+    <div id="oList" class="container">
 
-      <div class="row">
+     <!-- <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <h3><a href="#">ЗАО Пиво и воды</a></h3>
           <h6>(Удмуртия, Ижевск)</h6>
@@ -89,7 +89,7 @@
           <a class="btn btn-info pull-right btn-xs">В список</a>   
        </div>       
  
-      </div>
+      </div> -->
      </div>
 
 
@@ -237,6 +237,8 @@
             $(this).addClass('active');
             $(this).siblings().removeClass('active');
         });
+        
+        $("#oList").loadOList({debug:true, url: 'http://localhost:6543/crud/jsonp/organization.Organization'})
       });
     </script>
   </body>
