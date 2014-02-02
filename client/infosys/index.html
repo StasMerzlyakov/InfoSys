@@ -6,7 +6,7 @@
     <title>Информацционная система "Посредник"</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/infosys.css"/>
-     
+    
     <style>
     </style>
   </head>
@@ -54,59 +54,19 @@
     </div>
 
     
-    <div id="oList" class="container">
-
- <!--    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h3><a href="#">ЗАО Пиво и воды</a></h3>
-          <h6>(Удмуртия, Ижевск)</h6>
-          <h4>Рыба, колбаса</h4>
-          <p>Пиво, рыба колбаса и много ещё всего. Стройматериалы только у нас.</p>
-          <a class="btn btn-info pull-right btn-xs">В список</a>   
-       </div>       
- 
-      </div> -->
-   
-     <!--  <div class="row">
-    
-        <div class="col-md-6 col-md-offset-3">
-          <h3><a href="#">ООО Энигма+</a></h3>
-          <h6>(Удмуртия, Сарапул)</h6>
-          <h4>Кирпич, профнастил</h4>
-          <p>Кирпич красный, белый, серый, жженый.</p>
-          <a class="btn btn-info pull-right btn-xs">В список</a>   
-       </div>       
- 
-      </div>
-       <div class="row">
-    
-        <div class="col-md-6 col-md-offset-3">
-          <h3><a href="#">ОАО Варенье на вынос</a></h3>
-          <h6>(Татарстан, Агрыз)</h6>
-          <h4>Варенье, конфеты БУ</h4>
-          <p>БУ Варенье, конфеты, соки, сливки, Пиво, рыба колбаса и много ещё всего. Стройматериалы только у нас.</p>
-          <a class="btn btn-info pull-right btn-xs">В список</a>   
-       </div>       
- 
-      </div> -->
-     </div>
-
+    <div id="oList" class="container" />
 
     <div class="navbar navbar-default navbar-fixed-bottom">
       
       <div class="container">
         
-<!--        <p class="navbar-text pull-left">Поиск компаний</p> -->
-<!--        <a href="http://youtube.com/codersguide" class="navbar-btn btn-danger btn pull-right">Подписаться?</a>
-    -->
+        <p class="navbar-text pull-left">Поиск компаний</p>
+        <a href="http://youtube.com/codersguide" class="navbar-btn btn-danger btn pull-right">Подписаться?</a>
+    
       </div>
 
     </div>
-    <!-- <div class="container">
-      <div id="organization"/>
-    </div> 
-   -->
-   
+    
     <div class="modal fade" id="new" role="dialog">
         
         <div class="modal-dialog">
@@ -125,7 +85,9 @@
 				   
                </div>
                     
-                    <form id="new-organization-form" class="modal-body" role="form">
+                  <form id="new-organization-form" role="form">
+					
+					<div class="modal-body" >
 						
 						<div class="form-group">
 							<input type="text" class="form-control input-lg" placeholder="Название организации" required name="name"></input>
@@ -138,15 +100,13 @@
 						<div class="form-group">
 							 <textarea class="form-control input-lg" rows="5", placeholder="Описание деятельности", required, name="shortinfo"></textarea>
             			</div>
-	                
-                    </form>
+            			
+            		</div>
                   
                     <div class="modal-footer">
-    
-                        <button class="btn btn-primary" type="submit">Добавить</button>
-    
+    					<button class="btn btn-primary" type="submit">Добавить</button>
                     </div>
-                
+                </form>
             
             </div>
         
@@ -180,8 +140,7 @@
   
               </div> 
 
-			</form>
-
+      			</form>
  
             <div class="modal-footer">
       
@@ -231,11 +190,44 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="out/infosys.js"></script>
     <script type="text/javascript">
+				
+      function send(form) {
+        console.log(form.find("nput[name=name]"))
+      }
+		
       $(function() {
+		  
         $(".nav li").click(function(){
             $(this).addClass('active');
             $(this).siblings().removeClass('active');
         });
+        
+        $("#new-organization-form").submit(function(event){
+			event.preventDefault();
+			var url = 'http://localhost:6543/crud/jsonp/organization.Organization/Create';
+			
+			var form = $(event.target);
+			
+			var data = {
+				data : JSON.stringify({
+			      name : form.find("[name=name]").val(),
+			      placeinfo : form.find("[name=placeinfo]").val(),
+			      shortinfo : form.find("[name=shortinfo]").val()
+			    })
+			}
+			
+			$.ajax(url, {
+              dataType: 'jsonp',
+              data : data,
+              error: function() {
+                return alert('Ошибка при  добавлении данных' + url);
+              },
+              success: function(data) {
+                log(data);
+              }
+            });
+			
+		});
         
         $("#oList").loadOList({debug:true, url: 'http://localhost:6543/crud/jsonp/organization.Organization'})
       });
