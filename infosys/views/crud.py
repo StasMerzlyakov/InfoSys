@@ -132,7 +132,7 @@ def crud_model(request):
       # Пока не понятно может ли реально передаваться список,
       # делаем код на все случаи жизни:
       # Если словарь - добавляем в массив
-      updateList = ast.literal_eval(request.body)
+      updateList = ast.literal_eval(request.params.get('data'))
       if isinstance(updateList, dict):
         updateList = [updateList]
 
@@ -173,8 +173,12 @@ def crud_model(request):
       'identifier' : pk_name}
 
   if command == 'Create':
+    logger.info(request.params)
     #return { 'success' : False }
-    insertList = ast.literal_eval(request.body)
+
+    logger.info(request.params.get('data'))
+    insertList = ast.literal_eval(request.params.get('data'))
+    
     # Проверяем что получено - массив или словарь
     # Если словарь - добавляем в массив
     if isinstance(insertList, dict):
@@ -214,7 +218,7 @@ def crud_model(request):
   if command == 'Destroy':
     try:
       logger.info("request.body %s", request.body)
-      pk_value = ast.literal_eval(request.body).get(pk_name, None)
+      pk_value = ast.literal_eval(request.params.get('data')).get(pk_name, None)
       #pk_value = request.params[pk_name]
       if pk_value :
         logger.info("pk_value %s", pk_value)
