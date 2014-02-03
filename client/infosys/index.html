@@ -220,10 +220,10 @@
               dataType: 'jsonp',
               data : data,
               error: function() {
-                return alert('Ошибка при  добавлении данных' + url);
+				alert('Ошибка при  добавлении данных' + url);
               },
               success: function(data) {
-                log(data);
+                location.reload();
               }
             });
 			
