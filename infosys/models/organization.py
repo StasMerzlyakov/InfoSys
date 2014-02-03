@@ -31,7 +31,7 @@ class Organization(Base):
     name = Column(String(length=60), nullable=False)
 
     """ Краткое описание деятельности """
-    shortinfo = Column(String(length=250), nullable=False)
+    shortinfo = Column(String(length=500), nullable=False)
 
     """ Местоположение (регион, населенный пункт) """
     placeinfo = Column(String(length=100), nullable=False)

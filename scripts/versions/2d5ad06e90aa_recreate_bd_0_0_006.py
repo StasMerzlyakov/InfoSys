@@ -50,7 +50,7 @@ def upgrade():
     'ORG_Organization',
     Column('id', BigInteger, primary_key=True),
     Column('name', String(length=60), nullable=False),
-    Column('shortinfo', String(length=250), nullable=False),
+    Column('shortinfo', String(length=500), nullable=False),
     Column('contactinfo', String(length=100), nullable=False))
 
 
