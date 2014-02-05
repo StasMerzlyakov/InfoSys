@@ -33,6 +33,9 @@ class Organization(Base):
     """ Краткое описание деятельности """
     shortinfo = Column(String(length=500), nullable=False)
 
+    """ Ключевые слова """
+    keywords = Column(String(length=500), nullable=True)
+
     """ Местоположение (регион, населенный пункт) """
     placeinfo = Column(String(length=100), nullable=False)
 

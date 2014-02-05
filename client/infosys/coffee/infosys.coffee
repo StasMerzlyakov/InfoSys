@@ -19,7 +19,8 @@
         #    <div class="col-md-6 col-md-offset-3">
         #      <h3><a href="#">ЗАО Пиво и воды</a></h3>
         #      <h4>(Удмуртия, Ижевск)</h4>
-        #      <p>Рыба, колбаса</p>
+        #      <h5>Ключевые слова</h5>
+        #      <h6>Общее описание</h6>
         #      <a class="btn btn-info pull-right btn-xs">В список</a>   
         #    </div>
         #  </div
@@ -43,9 +44,16 @@
           placeEl = $ '<h4>'
           colEl.append placeEl
           placeEl.text '(' + row.placeinfo + ')'
+
+          # <h5>row.keywords</h5>
+          keywordsEl = $ '<h5>'
+          keywordsEl.addClass 'bold'
+          colEl.append keywordsEl
+          keywordsEl.text row.keywords
+
           
-          # <p>row.shortinfo</p>
-          infoEl = $ '<p>'
+          # <h6>row.shortinfo</h6>
+          infoEl = $ '<h6>'
           colEl.append infoEl
           infoEl.text row.shortinfo
           
