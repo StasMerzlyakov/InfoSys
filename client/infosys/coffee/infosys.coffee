@@ -67,23 +67,26 @@
           # Возвращаем элемент
           rowEl
           
-          
-          
-        
         # Инициализация списка организаций
         initTree = (selector, options) ->
           log 'load from url:' + options.url
+          log 'params : ' + options.params
           selector.each (i,val)->
+            # Очистка дочерних элементов
+            container = $ val
+            container.empty()
+             
             # Загрузка данных
             $.ajax options.url,
-              dataType: 'jsonp'
+              dataType: 'jsonp',
+              data : options.params,
               error: ()->
                 alert 'Ошибка при  загрузке' + options.url
               success: (data) ->
                 log data
                 data.items.forEach (item) ->
                   row = createRow item
-                  container = $ val 
+
                   container.append row
                  
           selector

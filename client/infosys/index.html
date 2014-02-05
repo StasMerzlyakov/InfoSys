@@ -98,6 +98,11 @@
             			</div>
 
 						<div class="form-group">
+							 <textarea class="form-control input-lg" rows="3", placeholder="Ключевые слова или описание, по которому будет осуществляться поиск", required, name="keywords"></textarea>
+            			</div>
+
+
+						<div class="form-group">
 							 <textarea class="form-control input-lg" rows="5", placeholder="Описание деятельности", required, name="shortinfo"></textarea>
             			</div>
             			
@@ -132,21 +137,24 @@
 
             </div> 
     
-            <form class="modal-body" role="form">
+            <form id="keywords-form" role="form">
+			 
+			   <div class="modal-body">
 
-              <div class="form-group">
+                 <div class="form-group">
   
-                  <input type="text" id="search-keywords" class="form-control input-lg" placeholder="Слова для писка через пробел" required name="keywords"></input>
+                   <input type="text" id="search-keywords" class="form-control input-lg" placeholder="Введите ключевые слова через пробел" required name="keywords"></input>
   
-              </div> 
+                 </div> 
+              
+               </div> 
 
-      			</form>
- 
-            <div class="modal-footer">
+               <div class="modal-footer">
       
-              <button class="btn btn-primary" type="submit">Принять</button>
+                 <button class="btn btn-primary" type="submit">Принять</button>
     
-            </div>
+               </div>
+            </form>
 
         </div> 
       
@@ -154,7 +162,7 @@
 
     </div>
 
-    <div class="modal fade" id="regions" role="dialog">
+<!--    <div class="modal fade" id="regions" role="dialog">
      
       <div class="modal-dialog">
     
@@ -184,7 +192,7 @@
       
       </div> 
 
-    </div>
+    </div> -->
 
     <script src="js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -196,15 +204,39 @@
       }
 		
       $(function() {
+		 
+		// Глобальная переменная, содержащая параметры фильтрации 
+		PARAMS = {
+	    }
+	    
+	    // Адрес  для получения списка организаций
+	    ORGANIZATION_URL =   'http://localhost:6543/crud/jsonp/organization.Organization';
 		  
         $(".nav li").click(function(){
             $(this).addClass('active');
             $(this).siblings().removeClass('active');
         });
         
+        function reloadOrganization() {
+			var params = {};
+			$.each(PARAMS, function(k,v){
+			  params[k] = JSON.stringify(v);
+			});
+			$("#oList").loadOList({debug:true, url: 'http://localhost:6543/crud/jsonp/organization.Organization', params : params}) 
+		}
+        
+        $("#keywords-form").submit(function(event){
+            event.preventDefault();
+			var form = $(event.target);
+			keywords = form.find("[name=keywords]").val();
+			PARAMS['keywords']=keywords;
+			$("#keywords").modal('hide');
+			reloadOrganization();
+		})
+        
         $("#new-organization-form").submit(function(event){
 			event.preventDefault();
-			var url = 'http://localhost:6543/crud/jsonp/organization.Organization/Create';
+			var url = ORGANIZATION_URL + '/Create';
 			
 			var form = $(event.target);
 			
@@ -212,6 +244,7 @@
 				data : JSON.stringify({
 			      name : form.find("[name=name]").val(),
 			      placeinfo : form.find("[name=placeinfo]").val(),
+			      keywords : form.find("[name=keywords]").val(),
 			      shortinfo : form.find("[name=shortinfo]").val()
 			    })
 			}
@@ -223,13 +256,14 @@
 				alert('Ошибка при  добавлении данных' + url);
               },
               success: function(data) {
-                location.reload();
+                //location.reload();
+                alert('Данные успешно добавлены');
+                $("#new").modal('hide');
+                reloadOrganization();                 
               }
             });
-			
 		});
-        
-        $("#oList").loadOList({debug:true, url: 'http://localhost:6543/crud/jsonp/organization.Organization'})
+        reloadOrganization();
       });
     </script>
   </body>

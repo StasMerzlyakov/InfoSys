@@ -26,6 +26,7 @@ Getting Started
 
 0. coffeescript
 1. postgresql
+2. Sphinx
 
 
 

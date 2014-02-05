@@ -11,7 +11,9 @@ import infosys.models
 import json
 import traceback, sys
 import inspect
+import pprint
 
+from infosys.utils.sphinx import sphinx_search
 
 from ..models import DBSession
 import infosys.models as models
@@ -22,7 +24,6 @@ logger = logging.getLogger(__name__)
 
 
 def addFilterToQuery(query, attr, filterVal):
-  logger.debug('ADDFILTERTOQUER !!!\n')
   if filterVal[0] == 'likeci':
     query = query.filter(func.lower(attr).like(func.lower(filterVal[1])))
   if filterVal[0] == 'like':
@@ -33,6 +34,8 @@ def addFilterToQuery(query, attr, filterVal):
     query = query.filter(attr == None)
   if filterVal[0] == 'notnull':
     query = query.filter(attr != None)
+  if filterVal[0] == 'in':
+    query = query.filter(attr.in_(filterVal[1]))
   return query
 
 @view_config(route_name='jsonp_crud_model', renderer='jsonp')
@@ -67,6 +70,7 @@ def crud_model(request):
     limit = request.params.get('limit',100)
     page = request.params.get('page', None)
     sort = request.params.get('sort', None)
+    keywords = request.params.get('keywords', None)
     # Может быть передан PK в виде фильтра
     pk_value = request.params.get(pk_name, None)
     if sort:
@@ -79,17 +83,20 @@ def crud_model(request):
         return { 'success' : False }
     
     query = DBSession.query(targetClass)
-    if pk_value:
-      query = query.filter_by(**{pk_name : pk_value})
-
+ 
     # Добавляем фильтры, если они были в запросе
     logger.debug(request.params.keys())
     for param_name in request.params.keys():
-      if not param_name == pk_name and \
-          hasattr( targetClass, param_name):
+      if hasattr( targetClass, param_name):
         param_value  = request.params[param_name]
         filterVal = ast.literal_eval(param_value)
         query = addFilterToQuery(query, getattr(targetClass,param_name), filterVal)
+    
+    # Делаем поиск по ключевым словам    
+    if keywords:
+      pprint.pprint(sphinx_search(keywords))
+        
+
     if page and limit:
       try:
         page = int(page)
@@ -120,8 +127,8 @@ def crud_model(request):
     total=totalQuery.count()
     msg = {
       'success' : True,
-             'total' : total,
-                  'identifier' : pk_name,
+      'total' : total,
+      'identifier' : pk_name,
       'items' : rlist,
     }
 
