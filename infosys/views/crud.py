@@ -8,12 +8,10 @@ import datetime
 import ast
 import traceback, sys
 import pprint
+import infosys.models as models
 
 from infosys.utils.sphinx import sphinx_search
-
 from ..models import DBSession
-import infosys.models as models
-from ..models.base import Base
 
 import logging
 logger = logging.getLogger(__name__)

@@ -16,10 +16,6 @@ revision = '3bf9d5f48bed'
 down_revision = None
 
 from alembic import op
-import sqlalchemy as sa
-
-from sqlalchemy.sql import table
-
 
 from sqlalchemy import (
     Column,

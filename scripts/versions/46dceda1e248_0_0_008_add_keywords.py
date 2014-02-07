@@ -14,7 +14,6 @@ revision = '46dceda1e248'
 down_revision = '1ce7067de8ed'
 
 from alembic import op
-import sqlalchemy as sa
 
 from sqlalchemy import (
     String, 

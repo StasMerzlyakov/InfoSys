@@ -14,15 +14,11 @@ revision = '2d5ad06e90aa'
 down_revision = '520bcf9c6cb8'
 
 from alembic import op
-import sqlalchemy as sa
-
-from sqlalchemy.sql import table
 
 from sqlalchemy import (
     Column,
     BigInteger,
     String, 
-    Text,
     )
 
 

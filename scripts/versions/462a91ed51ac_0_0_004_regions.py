@@ -17,11 +17,9 @@ down_revision = '26644fc2924e'
 
 
 from alembic import op
-import sqlalchemy as sa
 
 from sqlalchemy import (
   Column,
-  Index,
   Integer,
   String,
   ForeignKey,
