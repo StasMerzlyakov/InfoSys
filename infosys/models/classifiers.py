@@ -4,7 +4,6 @@ from base import Base
 
 from sqlalchemy import (
     Column,
-    ForeignKey,
     Integer,
     String,
     Boolean,

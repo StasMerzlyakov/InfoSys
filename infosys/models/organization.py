@@ -5,15 +5,8 @@ from base import Base
 from sqlalchemy import (
     Column,
     BigInteger,
-    Integer,
     String,
-    Text,
-    Date,
-    Boolean
     )
-
-
-from sqlalchemy.schema import ForeignKey
 
 
 """

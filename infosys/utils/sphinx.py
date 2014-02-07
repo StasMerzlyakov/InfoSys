@@ -5,7 +5,7 @@
 #
 
 import sphinxsearch
-import pprint
+
 # 
 # Метод поиск, реализованный через sphinx
 #

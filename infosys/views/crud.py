@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from pyramid.response import Response
 from pyramid.view import view_config
-from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
+from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.orm import class_mapper
 from sqlalchemy import func
 import datetime
 import ast
-import infosys.models
-import json
 import traceback, sys
-import inspect
 import pprint
 
 from infosys.utils.sphinx import sphinx_search
@@ -71,8 +67,6 @@ def crud_model(request):
     page = request.params.get('page', None)
     sort = request.params.get('sort', None)
     keywords = request.params.get('keywords', None)
-    # Может быть передан PK в виде фильтра
-    pk_value = request.params.get(pk_name, None)
     if sort:
       try:
         sort = ast.literal_eval(sort)

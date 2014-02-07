@@ -4,10 +4,8 @@ from base import Base
 
 from sqlalchemy import (
     Column,
-    Index,
     Integer,
     String,
-    Text,
     Date,
     Boolean
     )
