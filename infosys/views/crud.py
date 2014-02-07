@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
+from sqlalchemy.dialects.postgresql import array
 
 from pyramid.view import view_config
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.orm import class_mapper
-from sqlalchemy import func
+from sqlalchemy import func, select
 import datetime
 import ast
 import traceback, sys
-import pprint
 import infosys.models as models
 
 from infosys.utils.sphinx import sphinx_search
+from infosys.utils.temptable import create_temp_table
 from ..models import DBSession
 
 import logging
 logger = logging.getLogger(__name__)
 
+import pprint
 
 def addFilterToQuery(query, attr, filterVal):
   if filterVal[0] == 'likeci':
@@ -43,7 +45,7 @@ def crud_model(request):
     command: Get, Update, Destroy, Create
   """
   model=request.matchdict.get('model')
-  try: 
+  try:
     targetClass = rec_getattr( models, model)
     pk_name = class_mapper(targetClass).primary_key[0].name
   except:
@@ -84,11 +86,6 @@ def crud_model(request):
         filterVal = ast.literal_eval(param_value)
         query = addFilterToQuery(query, getattr(targetClass,param_name), filterVal)
     
-    # Делаем поиск по ключевым словам    
-    if keywords:
-      pprint.pprint(sphinx_search(keywords))
-        
-
     if page and limit:
       try:
         page = int(page)
@@ -97,6 +94,20 @@ def crud_model(request):
         query = query.offset((page-1)*limit)
       except:
         return { 'success' : False }
+
+    # Добавляем поиск по ключевым словам
+    if keywords:
+      matches = sphinx_search(keywords)
+      # после получения списка [{'id': 1, 'weight': 1, 'attrs': ...}, {id : 2, ...}]
+      # делаем массив вида [(1,2),(2.4)]
+      keywords_search_result = []
+      for elem in matches:
+        id = elem['id']
+        weight = elem['weight']
+        keywords_search_result.append((id,weight))
+      keywords_table = create_temp_table(DBSession, keywords_search_result)
+      query = query.join(keywords_table, keywords_table.columns.id == getattr(targetClass,pk_name))
+      query = query.order_by( keywords_table.columns.weight.desc())
 
 
     #.filter(targetClass.id.in_(idList)).all()
@@ -115,7 +126,9 @@ def crud_model(request):
         op = filterVal[0]
         if op == 'like':
           totalQuery = addFilterToQuery(totalQuery, getattr(targetClass,param_name), filterVal)        
-
+    if keywords:
+      totalQuery = totalQuery.join(keywords_table, keywords_table.columns.id == getattr(targetClass,pk_name))
+      totalQuery = totalQuery.order_by( keywords_table.columns.weight.desc())
     total=totalQuery.count()
     msg = {
       'success' : True,

@@ -6,6 +6,8 @@ from .models.base import  Base
 
 from pyramid.renderers import JSONP
 
+engine = None
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
