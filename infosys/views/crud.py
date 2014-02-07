@@ -85,15 +85,6 @@ def crud_model(request):
         param_value  = request.params[param_name]
         filterVal = ast.literal_eval(param_value)
         query = addFilterToQuery(query, getattr(targetClass,param_name), filterVal)
-    
-    if page and limit:
-      try:
-        page = int(page)
-        limit = int(limit)
-        query = query.limit(limit)
-        query = query.offset((page-1)*limit)
-      except:
-        return { 'success' : False }
 
     # Добавляем поиск по ключевым словам
     if keywords:
@@ -109,32 +100,31 @@ def crud_model(request):
       query = query.join(keywords_table, keywords_table.columns.id == getattr(targetClass,pk_name))
       query = query.order_by( keywords_table.columns.weight.desc())
 
+    # Делаем копию для запроса на получение количества
+    totalQuery = query
 
-    #.filter(targetClass.id.in_(idList)).all()
+    # К основному запросу добавляются ограничения страницы и общий limit
+    if page and limit:
+      try:
+        page = int(page)
+        limit = int(limit)
+        query = query.limit(limit)
+        query = query.offset((page-1)*limit)
+      except:
+        return { 'success' : False }
+
     queryList=query.all()
-    #return json.dumps(items, cls=AlchemyEncoder)
-    rlist = []
+
+    result_list = []
     for item in queryList:
-      rlist.append(obj_to_dict(item))
-    totalQuery = DBSession.query(targetClass)
-    # Добавляем фильтры, если они были в запросе
-    for param_name in request.params.keys():
-      if not param_name == pk_name and \
-          hasattr( targetClass, param_name):
-        param_value  = request.params[param_name]
-        filterVal = ast.literal_eval(param_value)
-        op = filterVal[0]
-        if op == 'like':
-          totalQuery = addFilterToQuery(totalQuery, getattr(targetClass,param_name), filterVal)        
-    if keywords:
-      totalQuery = totalQuery.join(keywords_table, keywords_table.columns.id == getattr(targetClass,pk_name))
-      totalQuery = totalQuery.order_by( keywords_table.columns.weight.desc())
+      result_list.append(obj_to_dict(item))
+
     total=totalQuery.count()
     msg = {
       'success' : True,
       'total' : total,
       'identifier' : pk_name,
-      'items' : rlist,
+      'items' : result_list,
     }
 
     return msg
