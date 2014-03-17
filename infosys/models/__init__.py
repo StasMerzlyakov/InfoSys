@@ -11,13 +11,13 @@ from zope.sqlalchemy import ZopeTransactionExtension
 
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 
-import base
+import infosys.models.base
 
-#import fias
+#import .fias
 
-import organization
+import infosys.models.organization
 
-#import classifiers
+#import .classifiers
 
 
 

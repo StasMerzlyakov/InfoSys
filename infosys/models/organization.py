@@ -1,6 +1,6 @@
 #-*- coding: UTF-8 -*-
 
-from base import Base
+from infosys.models.base import Base
 
 from sqlalchemy import (
     Column,

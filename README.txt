@@ -30,3 +30,9 @@ Getting Started
 
 
 
+
+To enable sphinxsearch, edit /etc/default/sphinxsearch and set START=yes
+cp ./sphix.conf /etc/sphinxsearch/sphinx.conf
+
+
+
